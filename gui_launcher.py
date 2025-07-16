@@ -5,24 +5,45 @@ import time
 from datetime import datetime
 
 # === Message Template Builder ===
-def generate_message(name, model, executive, inquiry_type, include_image):
-    date_str = datetime.now().strftime("%d %B %Y")
+def generate_message(name, model, executive, inquiry_type, include_image, inquiry_date):
+    date_str = inquiry_date
 
     if inquiry_type == "BW":
         message = f"""Hello {name},
-Thank you for your interest in Honda {model} on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. You can also connect with us on +91 7823944301 for any queries.
+Thank you for your interest in Honda {model} on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. 
+Exclusive Offers:
+• Cashback offer upto ₹5,000 on your favourite Honda models   
+• Insurance free (on select models)  
+• Leading finance partners with low cost EMI options
+
+For any sales queries, contact us at 7823944301 / 04  
+For service queries, contact us at 7823944302 / 06
+
+We are available on WhatsApp or phone for your convenience.  
 
 – Team Surya Honda"""
     else:  # Retail Inquiry
         message = f"""Hello {name},
 Thank you for visiting Surya Honda Porur on {date_str} and enquiring about {model} with Sales Executive {executive}. We look forward to serving you.
 
-– Team Surya Honda"""
+Exclusive Offers:
+• Cashback offer upto ₹5,000 on your favourite Honda models   
+• Insurance free (on select models)  
+• Leading finance partners with low cost EMI options
+
+For any sales queries, contact us at 7823944301 / 04  
+For service queries, contact us at 7823944302 / 06
+
+We are available on WhatsApp or phone for your convenience.  
+
+– Team Surya Honda"""
+
 
     return message
 
 # === WhatsApp Sender ===
 def send_messages():
+    inquiry_dates = date_text.get("1.0", tk.END).strip().splitlines()
     names = name_text.get("1.0", tk.END).strip().splitlines()
     numbers = number_text.get("1.0", tk.END).strip().splitlines()
     models = model_text.get("1.0", tk.END).strip().splitlines()
@@ -37,11 +58,12 @@ def send_messages():
 
     for i in range(count):
         try:
+            inquiry_date = inquiry_dates[i].strip()
             name = names[i].strip()
             phone = "+91" + numbers[i].strip()
             model = models[i].strip()
             executive = executives[i].strip()
-            message = generate_message(name, model, executive, inquiry_type, include_image)
+            message = generate_message(name, model, executive, inquiry_type, include_image, inquiry_date)
 
             print(f"📤 Sending to {name} ({phone})")
 
@@ -87,6 +109,7 @@ def build_input(label_text):
     return txt
 
 # === Fields for Bulk Input ===
+date_text = build_input("Inquiry Date")
 name_text = build_input("Customer Name")
 number_text = build_input("Contact Number")
 model_text = build_input("Model Enquired")
