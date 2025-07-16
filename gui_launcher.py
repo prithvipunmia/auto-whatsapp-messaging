@@ -10,7 +10,7 @@ def generate_message(name, model, executive, inquiry_type, include_image):
 
     if inquiry_type == "BW":
         message = f"""Hello {name},
-Thank you for your interest in Honda {model} on the Bikewala website. Sales Executive {executive} will be in touch with you soon.
+Thank you for your interest in Honda {model} on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. You can also connect with us on +91 7823944301 for any queries.
 
 – Team Surya Honda"""
     else:  # Retail Inquiry
