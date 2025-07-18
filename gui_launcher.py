@@ -68,7 +68,7 @@ def send_messages():
             print(f"📤 Sending to {name} ({phone})")
 
             if include_image == "Yes":
-                kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=15, tab_close=True)
+                kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=30, tab_close=False)
             else:
                 from datetime import datetime
                 from datetime import datetime, timedelta
@@ -79,7 +79,7 @@ def send_messages():
 
                 kit.sendwhatmsg(phone, message, hour_now, minute_now, 15, True, True)
 
-            time.sleep(40)
+            time.sleep(20)
         except Exception as e:
             print(f"❌ Failed for {name}: {e}")
 
