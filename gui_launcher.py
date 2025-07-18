@@ -2,10 +2,10 @@ import tkinter as tk
 from tkinter import messagebox
 import pywhatkit as kit
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # === Message Template Builder ===
-def generate_message(name, model, executive, inquiry_type, include_image, inquiry_date):
+def generate_message(name, model, executive, inquiry_type, inquiry_date):
     date_str = inquiry_date
 
     if inquiry_type == "BW":
@@ -16,12 +16,24 @@ Exclusive Offers:
 • Insurance free (on select models)  
 • Leading finance partners with low cost EMI options
 
-For any sales queries, contact us at 7823944301 / 04  
-For service queries, contact us at 7823944302 / 06
+You can find the complete catalogue of Honda vehicles here on Whatsapp. 
+Feel free to reach out for any queries.
 
-We are available on WhatsApp or phone for your convenience.  
+- Team Surya Honda"""
+    
+    elif inquiry_type == "Delivery":
+        message = f"""Hello {name},
+Thank you for choosing Honda {model}. We hope you had a great delivery experience with Sales Executive {executive}.  
+We’re thrilled to have you as part of the Surya Honda family!
+
+For any queries or feedback, contact us at 7823944301 / 04.
+
+For service queries, contact us on 7823944302 / 06.
+
+We’re always here to help.
 
 – Team Surya Honda"""
+
     else:  # Retail Inquiry
         message = f"""Hello {name},
 Thank you for visiting Surya Honda Porur on {date_str} and enquiring about {model} with Sales Executive {executive}. We look forward to serving you.
@@ -36,8 +48,7 @@ For service queries, contact us at 7823944302 / 06
 
 We are available on WhatsApp or phone for your convenience.  
 
-– Team Surya Honda"""
-
+– Team Surya Honda"""
 
     return message
 
@@ -56,6 +67,9 @@ def send_messages():
         messagebox.showerror("Error", "Please enter valid customer data.")
         return
 
+    wait_time_image = 30
+    wait_time_text = 15
+
     for i in range(count):
         try:
             inquiry_date = inquiry_dates[i].strip()
@@ -68,22 +82,23 @@ def send_messages():
             print(f"📤 Sending to {name} ({phone})")
 
             if include_image == "Yes":
-                kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=30, tab_close=False)
+                kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=wait_time_image, tab_close=True)
             else:
-                from datetime import datetime
-                from datetime import datetime, timedelta
-
-                now = datetime.now() + timedelta(minutes=1)
+                now = datetime.now() + timedelta(minutes=wait_time_text + 1)
                 hour_now = now.hour
                 minute_now = now.minute
+                if minute_now >= 60:
+                    minute_now -= 60
+                    hour_now += 1
 
-                kit.sendwhatmsg(phone, message, hour_now, minute_now, 15, True, True)
+                kit.sendwhatmsg(phone, message, hour_now, minute_now, wait_time_text, True, True)
 
-            time.sleep(20)
+            time.sleep(40)
         except Exception as e:
             print(f"❌ Failed for {name}: {e}")
 
     messagebox.showinfo("Done", f"Sent messages to {count} customers")
+
 
 # === GUI Setup ===
 root = tk.Tk()
@@ -120,6 +135,7 @@ inquiry_frame = tk.Frame(root)
 tk.Label(inquiry_frame, text="Inquiry Type:", font=("Arial", 10)).pack(side="left")
 tk.Radiobutton(inquiry_frame, text="Retail", variable=inquiry_var, value="Retail").pack(side="left", padx=10)
 tk.Radiobutton(inquiry_frame, text="BW", variable=inquiry_var, value="BW").pack(side="left", padx=10)
+tk.Radiobutton(inquiry_frame, text="Delivery", variable=inquiry_var, value="Delivery").pack(side="left", padx=10)
 inquiry_frame.pack(pady=5)
 
 # === Image Include Option ===
