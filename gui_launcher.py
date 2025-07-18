@@ -4,31 +4,44 @@ import pywhatkit as kit
 import time
 from datetime import datetime, timedelta
 
+import sys, os
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS  # Used by PyInstaller when bundled
+    except Exception:
+        base_path = os.path.abspath(".")  # Fallback for script mode
+    return os.path.join(base_path, relative_path)
+
 # === Message Template Builder ===
-def generate_message(name, model, executive, inquiry_type, inquiry_date):
+def generate_message(name, model, executive, inquiry_type, include_image, inquiry_date):
     date_str = inquiry_date
 
     if inquiry_type == "BW":
         message = f"""Hello {name},
 Thank you for your interest in Honda {model} on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. 
-Exclusive Offers:
+
+Exclusive Offers at Surya Honda:
 • Cashback offer upto ₹5,000 on your favourite Honda models   
 • Insurance free (on select models)  
 • Leading finance partners with low cost EMI options
 
 You can find the complete catalogue of Honda vehicles here on Whatsapp. 
-Feel free to reach out for any queries.
 
-- Team Surya Honda"""
+Contact Us:Kattapakkam/Porur:
+Sales: 9884492386/ 7823944304
+Service: 7823944795/ 7823944306
+
+–  Team Surya Honda"""
     
     elif inquiry_type == "Delivery":
         message = f"""Hello {name},
 Thank you for choosing Honda {model}. We hope you had a great delivery experience with Sales Executive {executive}.  
 We’re thrilled to have you as part of the Surya Honda family!
 
-For any queries or feedback, contact us at 7823944301 / 04.
-
-For service queries, contact us on 7823944302 / 06.
+Contact Us:Kattapakkam/Porur:
+Sales: 9884492386/ 7823944304
+Service: 7823944795/ 7823944306
 
 We’re always here to help.
 
@@ -43,10 +56,13 @@ Exclusive Offers:
 • Insurance free (on select models)  
 • Leading finance partners with low cost EMI options
 
-For any sales queries, contact us at 7823944301 / 04  
-For service queries, contact us at 7823944302 / 06
+You can find the complete catalogue of Honda vehicles here on Whatsapp.
 
 We are available on WhatsApp or phone for your convenience.  
+
+Contact Us:Kattapakkam/Porur:
+Sales: 9884492386/ 7823944304
+Service: 7823944795/ 7823944306
 
 – Team Surya Honda"""
 
@@ -68,7 +84,7 @@ def send_messages():
         return
 
     wait_time_image = 30
-    wait_time_text = 15
+    wait_time_text = 10
 
     for i in range(count):
         try:
@@ -84,14 +100,7 @@ def send_messages():
             if include_image == "Yes":
                 kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=wait_time_image, tab_close=True)
             else:
-                now = datetime.now() + timedelta(minutes=wait_time_text + 1)
-                hour_now = now.hour
-                minute_now = now.minute
-                if minute_now >= 60:
-                    minute_now -= 60
-                    hour_now += 1
-
-                kit.sendwhatmsg(phone, message, hour_now, minute_now, wait_time_text, True, True)
+                kit.sendwhatmsg_instantly(phone, message, wait_time=wait_time_text, tab_close=True)
 
             time.sleep(40)
         except Exception as e:
