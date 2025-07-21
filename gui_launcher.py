@@ -28,7 +28,7 @@ Exclusive Offers at Surya Honda:
 
 You can find the complete catalogue of Honda vehicles here on Whatsapp. 
 
-Contact Us:Kattapakkam/Porur:
+Contact Us: Kattapakkam/Porur:
 Sales: 9884492386/ 7823944304
 Service: 7823944795/ 7823944306
 
@@ -39,7 +39,7 @@ Service: 7823944795/ 7823944306
 Thank you for choosing Honda {model}. We hope you had a great delivery experience with Sales Executive {executive}.  
 We’re thrilled to have you as part of the Surya Honda family!
 
-Contact Us:Kattapakkam/Porur:
+Contact Us: Kattapakkam/Porur:
 Sales: 9884492386/ 7823944304
 Service: 7823944795/ 7823944306
 
@@ -60,7 +60,7 @@ You can find the complete catalogue of Honda vehicles here on Whatsapp.
 
 We are available on WhatsApp or phone for your convenience.  
 
-Contact Us:Kattapakkam/Porur:
+Contact Us: Kattapakkam/Porur:
 Sales: 9884492386/ 7823944304
 Service: 7823944795/ 7823944306
 
@@ -83,8 +83,8 @@ def send_messages():
         messagebox.showerror("Error", "Please enter valid customer data.")
         return
 
-    wait_time_image = 30
-    wait_time_text = 10
+    wait_time_image = 50
+    wait_time_text = 20
 
     for i in range(count):
         try:
@@ -100,7 +100,7 @@ def send_messages():
             if include_image == "Yes":
                 kit.sendwhats_image(phone, "Creatives.png", caption=message, wait_time=wait_time_image, tab_close=True)
             else:
-                kit.sendwhatmsg_instantly(phone, message, wait_time=wait_time_text, tab_close=True)
+                kit.sendwhatmsg_instantly(phone, message, wait_time=wait_time_text, tab_close=False)
 
             time.sleep(40)
         except Exception as e:
