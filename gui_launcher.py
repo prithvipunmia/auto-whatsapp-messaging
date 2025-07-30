@@ -19,9 +19,9 @@ def generate_message(name, model, executive, inquiry_type, include_image, inquir
 
     if inquiry_type == "BW":
         message = f"""Hello {name},
-Thank you for your interest in Honda {model} on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. 
+Thank you for your interest in *Honda {model}* on the Bikewala website. Our Sales Executive {executive} will be in touch with you soon. 
 
-Exclusive Offers at Surya Honda:
+Exclusive Offers at *Surya Honda*:
 • Cashback offer upto ₹5,000 on your favourite Honda models   
 • Insurance free (on select models)  
 • Leading finance partners with low cost EMI options
@@ -36,7 +36,7 @@ Service: 7823944795/ 7823944306
     
     elif inquiry_type == "Delivery":
         message = f"""Hello {name},
-Thank you for choosing Honda {model}. We hope you had a great delivery experience with Sales Executive {executive}.  
+Thank you for choosing *Honda {model}*. We hope you had a great delivery experience with Sales Executive {executive}.  
 We’re thrilled to have you as part of the Surya Honda family!
 
 Contact Us: Kattapakkam/Porur:
@@ -50,7 +50,7 @@ Please take a moment to write a positive review on Google: https://g.page/r/CQrT
 
     else:  # Retail Inquiry
         message = f"""Hello {name},
-Thank you for visiting Surya Honda on {date_str} and enquiring about {model} with Sales Executive {executive}. We look forward to serving you.
+Thank you for visiting *Surya Honda* on {date_str} and enquiring about *{model}* with Sales Executive {executive}. We look forward to serving you.
 
 Exclusive Offers:
 • Cashback offer upto ₹5,000 on your favourite Honda models   
@@ -65,7 +65,7 @@ Contact Us: Kattapakkam/Porur:
 Sales: 9884492386/ 7823944304
 Service: 7823944795/ 7823944306
 
-– Team Surya Honda"""
+- Team Surya Honda"""
 
     return message
 
