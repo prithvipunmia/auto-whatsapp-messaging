@@ -43,13 +43,14 @@ Contact Us: Kattapakkam/Porur:
 Sales: 9884492386/ 7823944304
 Service: 7823944795/ 7823944306
 
-We’re always here to help.
+We would appreciate your feedback on the delivery experience. 
+Please take a moment to write a positive review on Google: https://g.page/r/CQrTS_4yW_oSEAE/review
 
 – Team Surya Honda"""
 
     else:  # Retail Inquiry
         message = f"""Hello {name},
-Thank you for visiting Surya Honda Porur on {date_str} and enquiring about {model} with Sales Executive {executive}. We look forward to serving you.
+Thank you for visiting Surya Honda on {date_str} and enquiring about {model} with Sales Executive {executive}. We look forward to serving you.
 
 Exclusive Offers:
 • Cashback offer upto ₹5,000 on your favourite Honda models   
